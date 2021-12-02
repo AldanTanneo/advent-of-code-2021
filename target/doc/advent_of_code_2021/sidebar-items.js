@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["dispatch_challenge","Show the answer to challenge n"],["main","Main function"]],"mod":[["challenges","Challenges"],["utils","Utilities for loading data"]]});

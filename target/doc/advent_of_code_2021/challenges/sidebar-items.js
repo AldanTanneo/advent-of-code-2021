@@ -1,0 +1,1 @@
+initSidebarItems({"macro":[["display_solution","Display the solution, with an optional title"],["display_title","Display the challenge title"],["solve","Declare a solve function that shows results"]],"mod":[["day01","Day 1: Sonar Sweep"],["day02","Day 2: Dive!"]]});
