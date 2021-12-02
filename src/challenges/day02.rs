@@ -184,8 +184,8 @@ fn part_2() -> i64 {
     let data = utils::load_data::<Command<i64>>(INPUT);
     let (mut depth, mut horizontal_position, mut aim) = (0, 0, 0);
 
-    for command in data {
-        match command {
+    for c in data {
+        match c {
             Command::Forward(n) => {
                 horizontal_position += n;
                 depth += n * aim;
