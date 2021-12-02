@@ -1,5 +1,4 @@
 //! Utilities for loading data
-use std::fmt::Display;
 use std::fs::File;
 use std::io::{BufRead, BufReader};
 use std::str::FromStr;
@@ -7,7 +6,7 @@ use std::str::FromStr;
 /// Returns an iterator over sequential data in a file
 pub(crate) fn load_data<T: FromStr>(filename: &str) -> impl Iterator<Item = T>
 where
-    T::Err: Display,
+    T::Err: std::error::Error,
 {
     let file = File::open(filename).expect(format!("Failed to open file: {}", filename).as_str());
     let reader = BufReader::new(file);

@@ -1,4 +1,4 @@
-//! # Day 1 - Sonar Sweep
+//! # Day 1: Sonar Sweep
 //!
 //! ## Part One
 //!
@@ -129,7 +129,7 @@ const NAME: &str = "Sonar Sweep";
 /// Input file name
 const INPUT: &str = "input/1.txt";
 
-/// Solve Part One
+/// Solve part one
 fn part_1() -> i64 {
     let mut data = utils::load_data::<i64>(INPUT);
 
@@ -144,7 +144,7 @@ fn part_1() -> i64 {
     total
 }
 
-/// Solve Part Two
+/// Solve part two
 fn part_2() -> i64 {
     let mut data = utils::load_data::<i64>(INPUT);
 
@@ -165,11 +165,4 @@ fn part_2() -> i64 {
     total
 }
 
-/// Show results of part one and two
-pub(crate) fn solve() {
-    super::display_title!();
-    let part_one = part_1();
-    super::display_solution!(part_one, "Part One");
-    let part_two = part_2();
-    super::display_solution!(part_two, "Part Two");
-}
+super::solve!();
