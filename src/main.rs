@@ -22,6 +22,7 @@ use std::num::NonZeroU8;
 fn dispatch_challenge(challenge: NonZeroU8) {
     match challenge.get() {
         1 => challenges::day01::solve(),
+        2 => challenges::day02::solve(),
         _ => println!("Unknown challenge!"),
     }
 }
