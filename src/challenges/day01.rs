@@ -130,8 +130,8 @@ const NAME: &str = "Sonar Sweep";
 const INPUT: &str = "input/1.txt";
 
 /// Solve part one
-fn part_1() -> i64 {
-    let mut data = utils::load_data::<i64>(INPUT);
+fn part_1() -> u64 {
+    let mut data = utils::load_data::<u64>(INPUT);
 
     let mut total = 0;
     let mut old_val = data.next().unwrap_or(0);
@@ -145,8 +145,8 @@ fn part_1() -> i64 {
 }
 
 /// Solve part two
-fn part_2() -> i64 {
-    let mut data = utils::load_data::<i64>(INPUT);
+fn part_2() -> u64 {
+    let mut data = utils::load_data::<u64>(INPUT);
 
     let mut total = 0;
     let (mut v1, mut v2, mut v3) = (

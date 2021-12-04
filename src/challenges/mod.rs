@@ -4,6 +4,7 @@
 
 pub mod day01;
 pub mod day02;
+pub mod day03;
 
 /// Display the challenge title
 macro_rules! display_title {

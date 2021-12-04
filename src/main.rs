@@ -23,6 +23,7 @@ fn dispatch_challenge(challenge: NonZeroU8) {
     match challenge.get() {
         1 => challenges::day01::solve(),
         2 => challenges::day02::solve(),
+        3 => challenges::day03::solve(),
         _ => println!("Unknown challenge!"),
     }
 }

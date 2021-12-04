@@ -36,6 +36,7 @@
 <span id="36">36</span>
 <span id="37">37</span>
 <span id="38">38</span>
+<span id="39">39</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Advent of Code 2021</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## About</span>
@@ -59,9 +60,10 @@
 <span class="doccomment">/// Show the answer to challenge n</span>
 <span class="kw">fn</span> <span class="ident">dispatch_challenge</span>(<span class="ident">challenge</span>: <span class="ident">NonZeroU8</span>) {
     <span class="kw">match</span> <span class="ident">challenge</span>.<span class="ident">get</span>() {
-        <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">challenges::day01::solve</span>(),
-        <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">challenges::day02::solve</span>(),
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;Unknown challenge!&quot;</span>),
+        <span class="number">1</span> =&gt; <span class="ident">challenges::day01::solve</span>(),
+        <span class="number">2</span> =&gt; <span class="ident">challenges::day02::solve</span>(),
+        <span class="number">3</span> =&gt; <span class="ident">challenges::day03::solve</span>(),
+        <span class="kw">_</span> =&gt; <span class="macro">println!</span>(<span class="string">&quot;Unknown challenge!&quot;</span>),
     }
 }
 

@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["INPUT","Input file name"],["NAME","Name of the challenge"]],"fn":[["filter_by_bit",""],["is_one",""],["majority_bit",""],["part_1",""],["part_2",""],["solve","Show results of part one and two"]]});

@@ -324,10 +324,10 @@
     <span class="ident">T</span>: <span class="ident">FromStr</span>,
     <span class="op">&lt;</span><span class="ident">T</span> <span class="kw">as</span> <span class="ident">FromStr</span><span class="op">&gt;</span><span class="ident">::Err</span>: <span class="ident">Error</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">std::fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std::fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">std::fmt::Formatter</span>) -&gt; <span class="ident">std::fmt::Result</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">ParseMoveError::DirectionError</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Could not parse direction&quot;</span>),
-            <span class="ident">ParseMoveError::TypeError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">err</span>.<span class="ident">fmt</span>(<span class="ident">f</span>),
+            <span class="ident">ParseMoveError::DirectionError</span> =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Could not parse direction&quot;</span>),
+            <span class="ident">ParseMoveError::TypeError</span>(<span class="ident">err</span>) =&gt; <span class="ident">err</span>.<span class="ident">fmt</span>(<span class="ident">f</span>),
         }
     }
 }
@@ -346,7 +346,7 @@
 {
     <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> <span class="ident">ParseMoveError</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">split</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">split_whitespace</span>();
         <span class="kw">let</span> <span class="ident">direction</span> <span class="op">=</span> <span class="ident">split</span>.<span class="ident">next</span>().<span class="ident">unwrap_or_default</span>();
         <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">split</span>.<span class="ident">next</span>().<span class="ident">unwrap_or_default</span>();
@@ -354,28 +354,28 @@
         <span class="kw">let</span> <span class="ident">n</span> <span class="op">=</span> <span class="ident">num</span>.<span class="ident">parse</span>().<span class="ident">map_err</span>(<span class="ident"><span class="self">Self</span>::Err::TypeError</span>)<span class="question-mark">?</span>;
 
         <span class="kw">match</span> <span class="ident">direction</span> {
-            <span class="string">&quot;forward&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Forward</span>(<span class="ident">n</span>)),
-            <span class="string">&quot;down&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Down</span>(<span class="ident">n</span>)),
-            <span class="string">&quot;up&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Up</span>(<span class="ident">n</span>)),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident"><span class="self">Self</span>::Err::DirectionError</span>),
+            <span class="string">&quot;forward&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Forward</span>(<span class="ident">n</span>)),
+            <span class="string">&quot;down&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Down</span>(<span class="ident">n</span>)),
+            <span class="string">&quot;up&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Up</span>(<span class="ident">n</span>)),
+            <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident"><span class="self">Self</span>::Err::DirectionError</span>),
         }
     }
 }
 
 <span class="doccomment">/// Solve part one</span>
-<span class="kw">fn</span> <span class="ident">part_1</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i64</span> {
-    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">Command</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>);
+<span class="kw">fn</span> <span class="ident">part_1</span>() -&gt; <span class="ident">u64</span> {
+    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">Command</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>);
     <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">depth</span>, <span class="kw-2">mut</span> <span class="ident">horizontal_position</span>) <span class="op">=</span> (<span class="number">0</span>, <span class="number">0</span>);
 
     <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="ident">data</span> {
         <span class="kw">match</span> <span class="ident">c</span> {
-            <span class="ident">Command::Forward</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Command::Forward</span>(<span class="ident">n</span>) =&gt; {
                 <span class="ident">horizontal_position</span> <span class="op">+</span><span class="op">=</span> <span class="ident">n</span>;
             }
-            <span class="ident">Command::Down</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Command::Down</span>(<span class="ident">n</span>) =&gt; {
                 <span class="ident">depth</span> <span class="op">+</span><span class="op">=</span> <span class="ident">n</span>;
             }
-            <span class="ident">Command::Up</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">Command::Up</span>(<span class="ident">n</span>) =&gt; {
                 <span class="ident">depth</span> <span class="op">-</span><span class="op">=</span> <span class="ident">n</span>;
             }
         }
@@ -385,21 +385,21 @@
 }
 
 <span class="doccomment">/// Solve part two</span>
-<span class="kw">fn</span> <span class="ident">part_2</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i64</span> {
-    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">Command</span><span class="op">&lt;</span><span class="ident">i64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>);
+<span class="kw">fn</span> <span class="ident">part_2</span>() -&gt; <span class="ident">u64</span> {
+    <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">Command</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>);
     <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">depth</span>, <span class="kw-2">mut</span> <span class="ident">horizontal_position</span>, <span class="kw-2">mut</span> <span class="ident">aim</span>) <span class="op">=</span> (<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);
 
-    <span class="kw">for</span> <span class="ident">command</span> <span class="kw">in</span> <span class="ident">data</span> {
-        <span class="kw">match</span> <span class="ident">command</span> {
-            <span class="ident">Command::Forward</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    <span class="kw">for</span> <span class="ident">c</span> <span class="kw">in</span> <span class="ident">data</span> {
+        <span class="kw">match</span> <span class="ident">c</span> {
+            <span class="ident">Command::Forward</span>(<span class="ident">n</span>) =&gt; {
                 <span class="ident">horizontal_position</span> <span class="op">+</span><span class="op">=</span> <span class="ident">n</span>;
                 <span class="ident">depth</span> <span class="op">+</span><span class="op">=</span> <span class="ident">n</span> <span class="op">*</span> <span class="ident">aim</span>;
             }
-            <span class="ident">Command::Down</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">aim</span> <span class="op">+</span><span class="op">=</span> <span class="ident">n</span> <span class="kw">as</span> <span class="ident">i64</span>;
+            <span class="ident">Command::Down</span>(<span class="ident">n</span>) =&gt; {
+                <span class="ident">aim</span> <span class="op">+</span><span class="op">=</span> <span class="ident">n</span>;
             }
-            <span class="ident">Command::Up</span>(<span class="ident">n</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">aim</span> <span class="op">-</span><span class="op">=</span> <span class="ident">n</span> <span class="kw">as</span> <span class="ident">i64</span>;
+            <span class="ident">Command::Up</span>(<span class="ident">n</span>) =&gt; {
+                <span class="ident">aim</span> <span class="op">-</span><span class="op">=</span> <span class="ident">n</span>;
             }
         }
     }

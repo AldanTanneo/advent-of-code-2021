@@ -158,8 +158,8 @@ where
 }
 
 /// Solve part one
-fn part_1() -> i64 {
-    let data = utils::load_data::<Command<i64>>(INPUT);
+fn part_1() -> u64 {
+    let data = utils::load_data::<Command<u64>>(INPUT);
     let (mut depth, mut horizontal_position) = (0, 0);
 
     for c in data {
@@ -180,8 +180,8 @@ fn part_1() -> i64 {
 }
 
 /// Solve part two
-fn part_2() -> i64 {
-    let data = utils::load_data::<Command<i64>>(INPUT);
+fn part_2() -> u64 {
+    let data = utils::load_data::<Command<u64>>(INPUT);
     let (mut depth, mut horizontal_position, mut aim) = (0, 0, 0);
 
     for c in data {
@@ -191,10 +191,10 @@ fn part_2() -> i64 {
                 depth += n * aim;
             }
             Command::Down(n) => {
-                aim += n as i64;
+                aim += n;
             }
             Command::Up(n) => {
-                aim -= n as i64;
+                aim -= n;
             }
         }
     }

@@ -57,16 +57,18 @@
 <span id="57">57</span>
 <span id="58">58</span>
 <span id="59">59</span>
+<span id="60">60</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Challenges</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Module containing the solutions as submodules</span>
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">day01</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">day02</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">day03</span>;
 
 <span class="doccomment">/// Display the challenge title</span>
 <span class="macro">macro_rules!</span> <span class="ident">display_title</span> {
-    () <span class="op">=</span><span class="op">&gt;</span> {{
+    () =&gt; {{
         <span class="macro">println!</span>(
             <span class="string">&quot;\x1B[1mDay {} - {}\x1B[0m&quot;</span>,
             <span class="macro">module_path!</span>()
@@ -79,10 +81,10 @@
 
 <span class="doccomment">/// Display the solution, with an optional title</span>
 <span class="macro">macro_rules!</span> <span class="ident">display_solution</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">sol</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">sol</span>:<span class="ident">expr</span>) =&gt; {{
         <span class="macro">println!</span>(<span class="string">&quot;\x1B[3m  Solution: \x1B[23;32m{}\x1B[0m&quot;</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">sol</span>);
     }};
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">sol</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">title</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">sol</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">title</span>:<span class="ident">expr</span>) =&gt; {{
         <span class="macro">println!</span>(<span class="string">&quot;&gt; {}&quot;</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">title</span>);
         <span class="macro">crate::challenges::display_solution!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">sol</span>);
     }};
@@ -90,10 +92,10 @@
 
 <span class="doccomment">/// Declare a solve function that shows results</span>
 <span class="macro">macro_rules!</span> <span class="ident">solve</span> {
-    () <span class="op">=</span><span class="op">&gt;</span> {
+    () =&gt; {
         <span class="macro">crate::challenges::solve!</span>(<span class="ident">part_1</span>, <span class="ident">part_2</span>);
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_1</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_1</span>:<span class="ident">ident</span>) =&gt; {
         <span class="doccomment">/// Show results of part one</span>
         <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">solve</span>() {
             <span class="macro">crate::challenges::display_title!</span>();
@@ -101,7 +103,7 @@
             <span class="macro">super::display_solution!</span>(<span class="ident">part_one</span>, <span class="string">&quot;Part One&quot;</span>);
         }
     };
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_1</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_2</span>:<span class="ident">ident</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_1</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_2</span>:<span class="ident">ident</span>) =&gt; {
         <span class="doccomment">/// Show results of part one and two</span>
         <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">solve</span>() {
             <span class="macro">crate::challenges::display_title!</span>();
