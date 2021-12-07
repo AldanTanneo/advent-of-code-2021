@@ -38,6 +38,7 @@
 <span id="38">38</span>
 <span id="39">39</span>
 <span id="40">40</span>
+<span id="41">41</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Advent of Code 2021</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## About</span>
@@ -53,7 +54,7 @@
 <span class="doccomment">//! far. Nor do you need a fancy computer; every problem has a solution that</span>
 <span class="doccomment">//! completes in at most 15 seconds on ten-year-old hardware.</span>
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">challenges</span>;
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">mod</span> <span class="ident">utils</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">utils</span>;
 
 <span class="kw">use</span> <span class="ident">std::env::args</span>;
 <span class="kw">use</span> <span class="ident">std::num::NonZeroU8</span>;
@@ -65,6 +66,7 @@
         <span class="number">2</span> =&gt; <span class="ident">challenges::day02::solve</span>(),
         <span class="number">3</span> =&gt; <span class="ident">challenges::day03::solve</span>(),
         <span class="number">4</span> =&gt; <span class="ident">challenges::day04::solve</span>(),
+        <span class="number">5</span> =&gt; <span class="ident">challenges::day05::solve</span>(),
         <span class="kw">_</span> =&gt; <span class="macro">println!</span>(<span class="string">&quot;Unknown challenge!&quot;</span>),
     }
 }

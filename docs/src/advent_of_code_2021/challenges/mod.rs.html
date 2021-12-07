@@ -59,6 +59,7 @@
 <span id="59">59</span>
 <span id="60">60</span>
 <span id="61">61</span>
+<span id="62">62</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Challenges</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! Module containing the solutions as submodules</span>
@@ -67,6 +68,7 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">day02</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">day03</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">day04</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">day05</span>;
 
 <span class="doccomment">/// Display the challenge title</span>
 <span class="macro">macro_rules!</span> <span class="ident">display_title</span> {
@@ -99,7 +101,7 @@
     };
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_1</span>:<span class="ident">ident</span>) =&gt; {
         <span class="doccomment">/// Show results of part one</span>
-        <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">solve</span>() {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">solve</span>() {
             <span class="macro">crate::challenges::display_title!</span>();
             <span class="kw">let</span> <span class="ident">part_one</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_1</span>();
             <span class="macro">super::display_solution!</span>(<span class="ident">part_one</span>, <span class="string">&quot;Part One&quot;</span>);
@@ -107,7 +109,7 @@
     };
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_1</span>:<span class="ident">ident</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">part_2</span>:<span class="ident">ident</span>) =&gt; {
         <span class="doccomment">/// Show results of part one and two</span>
-        <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">solve</span>() {
+        <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">solve</span>() {
             <span class="macro">crate::challenges::display_title!</span>();
             <span class="kw">let</span> <span class="ident">part_one</span> <span class="op">=</span> <span class="ident">part_1</span>();
             <span class="macro">crate::challenges::display_solution!</span>(<span class="ident">part_one</span>, <span class="string">&quot;Part One&quot;</span>);
