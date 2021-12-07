@@ -25,6 +25,7 @@ fn dispatch_challenge(challenge: NonZeroU8) {
         2 => challenges::day02::solve(),
         3 => challenges::day03::solve(),
         4 => challenges::day04::solve(),
+        5 => challenges::day05::solve(),
         _ => println!("Unknown challenge!"),
     }
 }
