@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["INPUT","Input file name"],["NAME","Name of the challenge"]],"fn":[["part_1",""],["part_2",""],["solve","Show results of part one and two"]],"struct":[["Line",""],["Point",""]]});
+initSidebarItems({"constant":[["INPUT","Input file name"],["NAME","Name of the challenge"]],"fn":[["part_1","Solve part one"],["part_2","Solve part two"],["solve","Show results of part one and two"]],"struct":[["Line","2D line"],["Point","2D point"]]});

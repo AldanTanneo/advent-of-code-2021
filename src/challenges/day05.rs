@@ -106,11 +106,13 @@ const NAME: &str = "Hydrothermal Venture";
 /// Input file name
 const INPUT: &str = "input/5.txt";
 
+/// 2D point
 struct Point {
     pub x: usize,
     pub y: usize,
 }
 
+/// 2D line
 struct Line {
     pub from: Point,
     pub to: Point,
@@ -141,6 +143,7 @@ impl FromStr for Line {
     }
 }
 
+/// Solve part one
 fn part_1() -> u64 {
     let data = utils::load_data::<Line>(INPUT);
 
@@ -169,6 +172,7 @@ fn part_1() -> u64 {
     grid.iter().filter(|&&x| x > 1).count() as u64
 }
 
+/// Solve part two
 fn part_2() -> u64 {
     let data = utils::load_data::<Line>(INPUT);
 

@@ -206,6 +206,10 @@
 <span id="206">206</span>
 <span id="207">207</span>
 <span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Day 5: Hydrothermal Venture</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Part One</span>
@@ -314,11 +318,13 @@
 <span class="doccomment">/// Input file name</span>
 <span class="kw">const</span> <span class="ident">INPUT</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;input/5.txt&quot;</span>;
 
+<span class="doccomment">/// 2D point</span>
 <span class="kw">struct</span> <span class="ident">Point</span> {
     <span class="kw">pub</span> <span class="ident">x</span>: <span class="ident">usize</span>,
     <span class="kw">pub</span> <span class="ident">y</span>: <span class="ident">usize</span>,
 }
 
+<span class="doccomment">/// 2D line</span>
 <span class="kw">struct</span> <span class="ident">Line</span> {
     <span class="kw">pub</span> <span class="ident">from</span>: <span class="ident">Point</span>,
     <span class="kw">pub</span> <span class="ident">to</span>: <span class="ident">Point</span>,
@@ -349,6 +355,7 @@
     }
 }
 
+<span class="doccomment">/// Solve part one</span>
 <span class="kw">fn</span> <span class="ident">part_1</span>() -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">Line</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>);
 
@@ -377,6 +384,7 @@
     <span class="ident">grid</span>.<span class="ident">iter</span>().<span class="ident">filter</span>(<span class="op">|</span><span class="op">&amp;&amp;</span><span class="ident">x</span><span class="op">|</span> <span class="ident">x</span> <span class="op">&gt;</span> <span class="number">1</span>).<span class="ident">count</span>() <span class="kw">as</span> <span class="ident">u64</span>
 }
 
+<span class="doccomment">/// Solve part two</span>
 <span class="kw">fn</span> <span class="ident">part_2</span>() -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">Line</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>);
 
