@@ -197,6 +197,11 @@
 <span id="197">197</span>
 <span id="198">198</span>
 <span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Day 3: Binary Diagnostic</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## Part One</span>
@@ -340,6 +345,7 @@
 <span class="doccomment">/// Input file name</span>
 <span class="kw">const</span> <span class="ident">INPUT</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;input/3.txt&quot;</span>;
 
+<span class="doccomment">/// Solve part one</span>
 <span class="kw">fn</span> <span class="ident">part_1</span>() -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>).<span class="ident">peekable</span>();
     <span class="kw">let</span> <span class="ident">bit_length</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">peek</span>().<span class="ident">map</span>(<span class="ident">String::len</span>).<span class="ident">unwrap_or_default</span>();
@@ -347,7 +353,7 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data_size</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">for</span> <span class="ident">string</span> <span class="kw">in</span> <span class="ident">data</span> {
         <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">b</span>) <span class="kw">in</span> <span class="ident">string</span>.<span class="ident">as_bytes</span>().<span class="ident">iter</span>().<span class="ident">rev</span>().<span class="ident">enumerate</span>() {
-            <span class="ident">bits</span>[<span class="ident">i</span>] <span class="op">+</span><span class="op">=</span> ((<span class="kw-2">*</span><span class="ident">b</span> <span class="op">==</span> <span class="string">&#39;1&#39;</span> <span class="kw">as</span> <span class="ident">u8</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&amp;</span> <span class="number">1</span>;
+            <span class="ident">bits</span>[<span class="ident">i</span>] <span class="op">+</span><span class="op">=</span> ((<span class="kw-2">*</span><span class="ident">b</span> <span class="op">==</span> <span class="string">b&#39;1&#39;</span>) <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">&amp;</span> <span class="number">1</span>;
         }
         <span class="ident">data_size</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
     }
@@ -360,19 +366,22 @@
     (<span class="ident">gamma_rate</span> <span class="kw">as</span> <span class="ident">u64</span>) <span class="op">*</span> (<span class="ident">epsilon_rate</span> <span class="kw">as</span> <span class="ident">u64</span>)
 }
 
+<span class="doccomment">/// Checks wether the character at position `pos` is `&#39;1&#39;`</span>
 <span class="kw">fn</span> <span class="ident">is_one</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="ident">pos</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-    <span class="ident">s</span>.<span class="ident">as_bytes</span>()[<span class="ident">pos</span>] <span class="op">==</span> (<span class="string">&#39;1&#39;</span> <span class="kw">as</span> <span class="ident">u8</span>)
+    <span class="ident">s</span>.<span class="ident">as_bytes</span>()[<span class="ident">pos</span>] <span class="op">==</span> <span class="string">b&#39;1&#39;</span>
 }
 
-<span class="kw">fn</span> <span class="ident">majority_bit</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>], <span class="ident">pos</span>: <span class="ident">usize</span>, <span class="ident">data_size</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
-    <span class="number">2</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">is_one</span>(<span class="kw-2">*</span><span class="ident">s</span>, <span class="ident">pos</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">data_size</span>
+<span class="doccomment">/// Find the majority bit at postion `pos` in the string array</span>
+<span class="kw">fn</span> <span class="ident">majority_bit</span>(<span class="ident">v</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">str</span>], <span class="ident">pos</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
+    <span class="number">2</span> <span class="op">*</span> <span class="ident">v</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">is_one</span>(<span class="kw-2">*</span><span class="ident">s</span>, <span class="ident">pos</span>) <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">sum</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">v</span>.<span class="ident">len</span>()
 }
 
-<span class="kw">fn</span> <span class="ident">filter_by_bit</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>(<span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>, <span class="ident">majority</span>: <span class="ident">bool</span>) -&gt; <span class="ident">u64</span> {
+<span class="doccomment">/// Filter the string vector by majority (or minority) bit</span>
+<span class="kw">fn</span> <span class="ident">filter_by_bit</span>(<span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">str</span><span class="op">&gt;</span>, <span class="ident">majority</span>: <span class="ident">bool</span>) -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pos</span> <span class="op">=</span> <span class="number">0</span>;
     <span class="kw">let</span> <span class="ident">bit_length</span> <span class="op">=</span> <span class="ident">v</span>[<span class="number">0</span>].<span class="ident">len</span>();
     <span class="kw">while</span> <span class="ident">v</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">1</span> <span class="op">&amp;&amp;</span> <span class="ident">pos</span> <span class="op">&lt;</span> <span class="ident">bit_length</span> {
-        <span class="kw">let</span> <span class="ident">maj_bit</span> <span class="op">=</span> <span class="ident">majority_bit</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>, <span class="ident">pos</span>, <span class="ident">v</span>.<span class="ident">len</span>());
+        <span class="kw">let</span> <span class="ident">maj_bit</span> <span class="op">=</span> <span class="ident">majority_bit</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>, <span class="ident">pos</span>);
         <span class="ident">v</span> <span class="op">=</span> <span class="ident">v</span>
             .<span class="ident">into_iter</span>()
             .<span class="ident">filter</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> (<span class="ident">is_one</span>(<span class="ident">s</span>, <span class="ident">pos</span>) <span class="op">^</span> <span class="op">!</span><span class="ident">maj_bit</span>) <span class="op">^</span> <span class="op">!</span><span class="ident">majority</span>)
@@ -382,6 +391,7 @@
     <span class="ident">u64::from_str_radix</span>(<span class="ident">v</span>[<span class="number">0</span>], <span class="number">2</span>).<span class="ident">expect</span>(<span class="string">&quot;Could not find final string!&quot;</span>)
 }
 
+<span class="doccomment">/// Solve part two</span>
 <span class="kw">fn</span> <span class="ident">part_2</span>() -&gt; <span class="ident">u64</span> {
     <span class="kw">let</span> <span class="ident">owned_data</span> <span class="op">=</span> <span class="ident">utils::load_data</span>::<span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>(<span class="ident">INPUT</span>).<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
     <span class="kw">let</span> <span class="ident">oxygen_generator_rating</span> <span class="op">=</span> {

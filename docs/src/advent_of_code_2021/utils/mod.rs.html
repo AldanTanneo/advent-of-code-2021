@@ -37,7 +37,7 @@
 <span class="kw">where</span>
     <span class="ident">T::Err</span>: <span class="ident">std::error::Error</span>,
 {
-    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::open</span>(<span class="ident">filename</span>).<span class="ident">expect</span>(<span class="macro">format!</span>(<span class="string">&quot;Failed to open file: {}&quot;</span>, <span class="ident">filename</span>).<span class="ident">as_str</span>());
+    <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="ident">File::open</span>(<span class="ident">filename</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> <span class="macro">panic!</span>(<span class="string">&quot;Failed to open file: {}&quot;</span>, <span class="ident">filename</span>));
     <span class="kw">let</span> <span class="ident">reader</span> <span class="op">=</span> <span class="ident">BufReader::new</span>(<span class="ident">file</span>);
 
     <span class="ident">reader</span>
