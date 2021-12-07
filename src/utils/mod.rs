@@ -8,7 +8,7 @@ pub(crate) fn load_data<T: FromStr>(filename: &str) -> impl Iterator<Item = T>
 where
     T::Err: std::error::Error,
 {
-    let file = File::open(filename).expect(format!("Failed to open file: {}", filename).as_str());
+    let file = File::open(filename).unwrap_or_else(|_| panic!("Failed to open file: {}", filename));
     let reader = BufReader::new(file);
 
     reader

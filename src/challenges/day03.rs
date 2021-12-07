@@ -141,6 +141,7 @@ const NAME: &str = "Binary Diagnostic";
 /// Input file name
 const INPUT: &str = "input/3.txt";
 
+/// Solve part one
 fn part_1() -> u64 {
     let mut data = utils::load_data::<String>(INPUT).peekable();
     let bit_length = data.peek().map(String::len).unwrap_or_default();
@@ -148,7 +149,7 @@ fn part_1() -> u64 {
     let mut data_size = 0;
     for string in data {
         for (i, b) in string.as_bytes().iter().rev().enumerate() {
-            bits[i] += ((*b == '1' as u8) as u64) & 1;
+            bits[i] += ((*b == b'1') as u64) & 1;
         }
         data_size += 1;
     }
@@ -161,19 +162,22 @@ fn part_1() -> u64 {
     (gamma_rate as u64) * (epsilon_rate as u64)
 }
 
+/// Checks wether the character at position `pos` is `'1'`
 fn is_one(s: &str, pos: usize) -> bool {
-    s.as_bytes()[pos] == ('1' as u8)
+    s.as_bytes()[pos] == b'1'
 }
 
-fn majority_bit<'a>(v: &[&str], pos: usize, data_size: usize) -> bool {
-    2 * v.iter().map(|s| is_one(*s, pos) as usize).sum::<usize>() >= data_size
+/// Find the majority bit at postion `pos` in the string array
+fn majority_bit(v: &[&str], pos: usize) -> bool {
+    2 * v.iter().map(|s| is_one(*s, pos) as usize).sum::<usize>() >= v.len()
 }
 
-fn filter_by_bit<'a>(mut v: Vec<&str>, majority: bool) -> u64 {
+/// Filter the string vector by majority (or minority) bit
+fn filter_by_bit(mut v: Vec<&str>, majority: bool) -> u64 {
     let mut pos = 0;
     let bit_length = v[0].len();
     while v.len() > 1 && pos < bit_length {
-        let maj_bit = majority_bit(&v, pos, v.len());
+        let maj_bit = majority_bit(&v, pos);
         v = v
             .into_iter()
             .filter(|s| (is_one(s, pos) ^ !maj_bit) ^ !majority)
@@ -183,6 +187,7 @@ fn filter_by_bit<'a>(mut v: Vec<&str>, majority: bool) -> u64 {
     u64::from_str_radix(v[0], 2).expect("Could not find final string!")
 }
 
+/// Solve part two
 fn part_2() -> u64 {
     let owned_data = utils::load_data::<String>(INPUT).collect::<Vec<_>>();
     let oxygen_generator_rating = {
