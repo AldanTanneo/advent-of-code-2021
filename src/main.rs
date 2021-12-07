@@ -13,7 +13,7 @@
 //! far. Nor do you need a fancy computer; every problem has a solution that
 //! completes in at most 15 seconds on ten-year-old hardware.
 pub mod challenges;
-pub(crate) mod utils;
+pub mod utils;
 
 use std::env::args;
 use std::num::NonZeroU8;

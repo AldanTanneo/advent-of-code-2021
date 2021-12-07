@@ -6,6 +6,7 @@ pub mod day01;
 pub mod day02;
 pub mod day03;
 pub mod day04;
+pub mod day05;
 
 /// Display the challenge title
 macro_rules! display_title {
@@ -38,7 +39,7 @@ macro_rules! solve {
     };
     ($part_1:ident) => {
         /// Show results of part one
-        pub(crate) fn solve() {
+        pub fn solve() {
             crate::challenges::display_title!();
             let part_one = $part_1();
             super::display_solution!(part_one, "Part One");
@@ -46,7 +47,7 @@ macro_rules! solve {
     };
     ($part_1:ident, $part_2:ident) => {
         /// Show results of part one and two
-        pub(crate) fn solve() {
+        pub fn solve() {
             crate::challenges::display_title!();
             let part_one = part_1();
             crate::challenges::display_solution!(part_one, "Part One");

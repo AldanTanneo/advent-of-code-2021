@@ -4,7 +4,7 @@ use std::io::{BufRead, BufReader};
 use std::str::FromStr;
 
 /// Returns an iterator over sequential data in a file
-pub(crate) fn load_data<T: FromStr>(filename: &str) -> impl Iterator<Item = T>
+pub fn load_data<T: FromStr>(filename: &str) -> impl Iterator<Item = T>
 where
     T::Err: std::error::Error,
 {
