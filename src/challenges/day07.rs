@@ -20,8 +20,8 @@ fn part_1() -> u64 {
         .filter_map(|s| s.parse::<u64>().ok())
         .collect::<Vec<_>>();
     let mid = data.len() / 2;
-    data.select_nth_unstable(mid);
-    sum_distances(&data, data[mid])
+    let median = *data.select_nth_unstable(mid).1;
+    sum_distances(&data, median)
 }
 
 /// Sum the fuel consumed to get to `pos`, calculated according to part 2
