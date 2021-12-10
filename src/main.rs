@@ -16,28 +16,38 @@ pub mod challenges;
 pub mod utils;
 
 use std::env::args;
-use std::num::NonZeroU8;
+
+const N: usize = 10;
+
+const SOLUTIONS: [fn() -> (); N] = [
+    challenges::day01::solve,
+    challenges::day02::solve,
+    challenges::day03::solve,
+    challenges::day04::solve,
+    challenges::day05::solve,
+    challenges::day06::solve,
+    challenges::day07::solve,
+    challenges::day08::solve,
+    challenges::day09::solve,
+    challenges::day10::solve,
+];
 
 /// Show the answer to challenge n
-fn dispatch_challenge(challenge: NonZeroU8) {
-    match challenge.get() {
-        1 => challenges::day01::solve(),
-        2 => challenges::day02::solve(),
-        3 => challenges::day03::solve(),
-        4 => challenges::day04::solve(),
-        5 => challenges::day05::solve(),
-        6 => challenges::day06::solve(),
-        7 => challenges::day07::solve(),
-        8 => challenges::day08::solve(),
-        9 => challenges::day09::solve(),
-        10 => challenges::day10::solve(),
-        _ => println!("Unknown challenge!"),
+fn dispatch_challenge(challenge: usize) {
+    match challenge {
+        1..=N => SOLUTIONS[challenge - 1](),
+        _ => println!(
+            "\x1B[1mAdvent of Code 2021\x1B[0m
+
+Unknown challenge: {}. Try a number between 1 and {}!",
+            challenge, N
+        ),
     }
 }
 
 /// Main function
 fn main() {
-    if let Some(challenge) = args().nth(1).map(|c| c.parse::<NonZeroU8>().ok()).flatten() {
+    if let Some(challenge) = args().nth(1).map(|c| c.parse::<usize>().ok()).flatten() {
         dispatch_challenge(challenge);
     } else {
         println!("\x1B[1mAdvent of Code 2021\x1B[0m");
