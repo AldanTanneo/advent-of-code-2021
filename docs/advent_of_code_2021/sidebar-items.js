@@ -1,1 +1,1 @@
-initSidebarItems({"fn":[["dispatch_challenge","Show the answer to challenge n"],["main","Main function"]],"mod":[["challenges","Challenges"],["utils","Utilities for loading data"]]});
+initSidebarItems({"constant":[["N","Number of solved challenges"],["SOLUTIONS","Array of function pointers to solutions"]],"fn":[["dispatch_challenge","Show the answer to the given challenge"],["main","Main function"]],"mod":[["challenges","Challenges"],["utils","Utilities for loading data"]]});

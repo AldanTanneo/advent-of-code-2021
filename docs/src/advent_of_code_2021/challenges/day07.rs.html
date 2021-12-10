@@ -70,8 +70,8 @@
         .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>().<span class="ident">ok</span>())
         .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>();
     <span class="kw">let</span> <span class="ident">mid</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">len</span>() <span class="op">/</span> <span class="number">2</span>;
-    <span class="ident">data</span>.<span class="ident">select_nth_unstable</span>(<span class="ident">mid</span>);
-    <span class="ident">sum_distances</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>, <span class="ident">data</span>[<span class="ident">mid</span>])
+    <span class="kw">let</span> <span class="ident">median</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">data</span>.<span class="ident">select_nth_unstable</span>(<span class="ident">mid</span>).<span class="number">1</span>;
+    <span class="ident">sum_distances</span>(<span class="kw-2">&amp;</span><span class="ident">data</span>, <span class="ident">median</span>)
 }
 
 <span class="doccomment">/// Sum the fuel consumed to get to `pos`, calculated according to part 2</span>

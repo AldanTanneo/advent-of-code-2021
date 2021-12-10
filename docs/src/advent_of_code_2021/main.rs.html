@@ -44,6 +44,18 @@
 <span id="44">44</span>
 <span id="45">45</span>
 <span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
+<span id="54">54</span>
+<span id="55">55</span>
+<span id="56">56</span>
+<span id="57">57</span>
+<span id="58">58</span>
 </pre><pre class="rust"><code><span class="doccomment">//! # Advent of Code 2021</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ## About</span>
@@ -62,28 +74,40 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">utils</span>;
 
 <span class="kw">use</span> <span class="ident">std::env::args</span>;
-<span class="kw">use</span> <span class="ident">std::num::NonZeroU8</span>;
 
-<span class="doccomment">/// Show the answer to challenge n</span>
-<span class="kw">fn</span> <span class="ident">dispatch_challenge</span>(<span class="ident">challenge</span>: <span class="ident">NonZeroU8</span>) {
-    <span class="kw">match</span> <span class="ident">challenge</span>.<span class="ident">get</span>() {
-        <span class="number">1</span> =&gt; <span class="ident">challenges::day01::solve</span>(),
-        <span class="number">2</span> =&gt; <span class="ident">challenges::day02::solve</span>(),
-        <span class="number">3</span> =&gt; <span class="ident">challenges::day03::solve</span>(),
-        <span class="number">4</span> =&gt; <span class="ident">challenges::day04::solve</span>(),
-        <span class="number">5</span> =&gt; <span class="ident">challenges::day05::solve</span>(),
-        <span class="number">6</span> =&gt; <span class="ident">challenges::day06::solve</span>(),
-        <span class="number">7</span> =&gt; <span class="ident">challenges::day07::solve</span>(),
-        <span class="number">8</span> =&gt; <span class="ident">challenges::day08::solve</span>(),
-        <span class="number">9</span> =&gt; <span class="ident">challenges::day09::solve</span>(),
-        <span class="number">10</span> =&gt; <span class="ident">challenges::day10::solve</span>(),
-        <span class="kw">_</span> =&gt; <span class="macro">println!</span>(<span class="string">&quot;Unknown challenge!&quot;</span>),
+<span class="doccomment">/// Number of solved challenges</span>
+<span class="kw">const</span> <span class="ident">N</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">10</span>;
+
+<span class="doccomment">/// Array of function pointers to solutions</span>
+<span class="kw">const</span> <span class="ident">SOLUTIONS</span>: [<span class="kw">fn</span>(); <span class="ident">N</span>] <span class="op">=</span> [
+    <span class="ident">challenges::day01::solve</span>,
+    <span class="ident">challenges::day02::solve</span>,
+    <span class="ident">challenges::day03::solve</span>,
+    <span class="ident">challenges::day04::solve</span>,
+    <span class="ident">challenges::day05::solve</span>,
+    <span class="ident">challenges::day06::solve</span>,
+    <span class="ident">challenges::day07::solve</span>,
+    <span class="ident">challenges::day08::solve</span>,
+    <span class="ident">challenges::day09::solve</span>,
+    <span class="ident">challenges::day10::solve</span>,
+];
+
+<span class="doccomment">/// Show the answer to the given challenge</span>
+<span class="kw">fn</span> <span class="ident">dispatch_challenge</span>(<span class="ident">challenge</span>: <span class="ident">usize</span>) {
+    <span class="kw">match</span> <span class="ident">challenge</span> {
+        <span class="number">1</span>..<span class="op">=</span><span class="ident">N</span> =&gt; <span class="ident">SOLUTIONS</span>[<span class="ident">challenge</span> <span class="op">-</span> <span class="number">1</span>](),
+        <span class="kw">_</span> =&gt; <span class="macro">println!</span>(
+            <span class="string">&quot;\x1B[1mAdvent of Code 2021\x1B[0m
+
+Unknown challenge: {}. Try a number between 1 and {}!&quot;</span>,
+            <span class="ident">challenge</span>, <span class="ident">N</span>
+        ),
     }
 }
 
 <span class="doccomment">/// Main function</span>
 <span class="kw">fn</span> <span class="ident">main</span>() {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">challenge</span>) <span class="op">=</span> <span class="ident">args</span>().<span class="ident">nth</span>(<span class="number">1</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">NonZeroU8</span><span class="op">&gt;</span>().<span class="ident">ok</span>()).<span class="ident">flatten</span>() {
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">challenge</span>) <span class="op">=</span> <span class="ident">args</span>().<span class="ident">nth</span>(<span class="number">1</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> <span class="ident">c</span>.<span class="ident">parse</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>().<span class="ident">ok</span>()).<span class="ident">flatten</span>() {
         <span class="ident">dispatch_challenge</span>(<span class="ident">challenge</span>);
     } <span class="kw">else</span> {
         <span class="macro">println!</span>(<span class="string">&quot;\x1B[1mAdvent of Code 2021\x1B[0m&quot;</span>);

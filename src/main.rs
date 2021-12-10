@@ -17,9 +17,11 @@ pub mod utils;
 
 use std::env::args;
 
+/// Number of solved challenges
 const N: usize = 10;
 
-const SOLUTIONS: [fn() -> (); N] = [
+/// Array of function pointers to solutions
+const SOLUTIONS: [fn(); N] = [
     challenges::day01::solve,
     challenges::day02::solve,
     challenges::day03::solve,
@@ -32,7 +34,7 @@ const SOLUTIONS: [fn() -> (); N] = [
     challenges::day10::solve,
 ];
 
-/// Show the answer to challenge n
+/// Show the answer to the given challenge
 fn dispatch_challenge(challenge: usize) {
     match challenge {
         1..=N => SOLUTIONS[challenge - 1](),
