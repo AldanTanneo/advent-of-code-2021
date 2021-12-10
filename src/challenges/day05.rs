@@ -179,12 +179,7 @@ fn part_2() -> u64 {
     let mut grid = vec![0; 1000 * 1000];
     for Line { from, to } in data {
         if from.x == to.x {
-            let range = if from.y < to.y {
-                from.y..=to.y
-            } else {
-                to.y..=from.y
-            };
-            for y in range {
+            for y in from.y..=to.y {
                 grid[from.x + 1000 * y] += 1;
             }
         } else if from.y == to.y {
