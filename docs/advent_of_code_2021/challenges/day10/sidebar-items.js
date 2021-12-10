@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["INPUT","Input file name"],["NAME","Name of the challenge"]],"fn":[["opening","Return the corresponding opening character"],["part_1","Solve part one"],["part_2","Solve part two"],["solve","Show results of part one and two"],["value","Return the score corresponding to the character"]]});

@@ -15,7 +15,7 @@ fn char_to_digit(c: char) -> u64 {
 }
 
 /// Calls function `f` on every low point in the given `data` matrix
-fn at_low_points(data: &Vec<Vec<u64>>, mut f: impl FnMut(usize, usize)) {
+fn at_low_points(data: &[Vec<u64>], mut f: impl FnMut(usize, usize)) {
     let n = data.len();
     let m = data[0].len();
     /* Corners */

@@ -5,7 +5,7 @@ const NAME: &str = "The Treachery of Whales";
 const INPUT: &str = "input/7.txt";
 
 /// Sum the distances between the crabs and `pos`
-fn sum_distances(data: &Vec<u64>, pos: u64) -> u64 {
+fn sum_distances(data: &[u64], pos: u64) -> u64 {
     data.iter()
         .map(|x| if x > &pos { x - pos } else { pos - x })
         .sum()
@@ -19,13 +19,13 @@ fn part_1() -> u64 {
         .split(',')
         .filter_map(|s| s.parse::<u64>().ok())
         .collect::<Vec<_>>();
-    data.sort();
     let mid = data.len() / 2;
+    data.select_nth_unstable(mid);
     sum_distances(&data, data[mid])
 }
 
 /// Sum the fuel consumed to get to `pos`, calculated according to part 2
-fn sum_squared_distances(data: &Vec<u64>, pos: u64) -> u64 {
+fn sum_squared_distances(data: &[u64], pos: u64) -> u64 {
     data.iter()
         .map(|x| {
             let val = if x > &pos { x - pos } else { pos - x };
