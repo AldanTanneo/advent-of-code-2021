@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["INPUT","Input file name"],["NAME","Name of the challenge"]],"fn":[["part_1","Solve part one"],["part_2","Solve part two"],["solve","Show results of part one and two"],["sum_distances","Sum the distances between the crabs and `pos`"],["sum_squared_distances","Sum the fuel consumed to get to `pos`, calculated according to part 2"]]});

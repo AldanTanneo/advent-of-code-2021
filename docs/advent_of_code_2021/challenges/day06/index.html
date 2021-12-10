@@ -1,0 +1,81 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Day 6: Lanternfish"><meta name="keywords" content="rust, rustlang, rust-lang, day06"><title>advent_of_code_2021::challenges::day06 - Rust</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc mod"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../advent_of_code_2021/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a><h2 class="location">Module day06</h2><div class="sidebar-elems"><div class="block items"><ul><li><a href="#constants">Constants</a></li><li><a href="#functions">Functions</a></li></ul></div><div id="sidebar-vars" data-name="day06" data-ty="mod" data-relpath="./"></div><script defer src="./sidebar-items.js"></script></div></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><h1 class="fqn"><span class="in-band">Module <a href="../../index.html">advent_of_code_2021</a>::<wbr><a href="../index.html">challenges</a>::<wbr><a class="mod" href="#">day06</a><button id="copy-path" onclick="copy_path(this)" title="Copy item path to clipboard"><img src="../../../clipboard.svg" width="19" height="18" alt="Copy item path"></button></span><span class="out-of-band"><span id="render-detail"><a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">[<span class="inner">&#x2212;</span>]</a></span><a class="srclink" href="../../../src/advent_of_code_2021/challenges/day06.rs.html#1-135" title="goto source code">[src]</a></span></h1><details class="rustdoc-toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="day-6-lanternfish" class="section-header"><a href="#day-6-lanternfish">Day 6: Lanternfish</a></h2><h3 id="part-one" class="section-header"><a href="#part-one">Part One</a></h3>
+<p>The sea floor is getting steeper. Maybe the sleigh keys got carried this
+way?</p>
+<p>A massive school of glowing
+<a href="https://en.wikipedia.org/wiki/Lanternfish">lanternfish</a> swims past. They
+must spawn quickly to reach such large numbers - maybe <strong>exponentially</strong>
+quickly? You should model their growth rate to be sure.</p>
+<p>Although you know nothing about this specific species of lanternfish, you
+make some guesses about their attributes. Surely, each lanternfish creates
+a new lanternfish once every <strong>7</strong> days.</p>
+<p>However, this process isn’t necessarily synchronized between every
+lanternfish - one lanternfish might have 2 days left until it creates
+another lanternfish, while another might have 4. So, you can model each
+fish as a single number that represents <strong>the number of days until it
+creates a new lanternfish</strong>.</p>
+<p>Furthermore, you reason, a <strong>new</strong> lanternfish would surely need slightly
+longer before it’s capable of producing more lanternfish: two more days for
+its first cycle.</p>
+<p>So, suppose you have a lanternfish with an internal timer value of 3:</p>
+<ul>
+<li>After one day, its internal timer would become <code>2</code>.</li>
+<li>After another day, its internal timer would become <code>1</code>.</li>
+<li>After another day, its internal timer would become <code>0</code>.</li>
+<li>After another day, its internal timer would reset to <code>6</code>, and it would
+create a <strong>new</strong> lanternfish with an internal timer of <code>8</code>.</li>
+<li>After another day, the first lanternfish would have an internal timer of
+<code>5</code>, and the second lanternfish would have an internal timer of <code>7</code>.</li>
+</ul>
+<p>A lanternfish that creates a new fish resets its timer to <code>6</code>, <strong>not <code>7</code></strong>
+(because <code>0</code> is included as a valid timer value). The new lanternfish starts with an internal timer of 8 and does not start counting down until the next day.</p>
+<p>Realizing what you’re trying to do, the submarine automatically produces a
+list of the ages of several hundred nearby lanternfish (your puzzle input).
+For example, suppose you were given the following list:</p>
+<div class="example-wrap"><pre class="language-txt"><code>3,4,3,1,2</code></pre></div>
+<p>This list means that the first fish has an internal timer of <code>3</code>, the
+second fish has an internal timer of <code>4</code>, and so on until the fifth fish,
+which has an internal timer of <code>2</code>. Simulating these fish over several days
+would proceed as follows:</p>
+<div class="example-wrap"><pre class="language-txt"><code>Initial state: 3,4,3,1,2
+After  1 day:  2,3,2,0,1
+After  2 days: 1,2,1,6,0,8
+After  3 days: 0,1,0,5,6,7,8
+After  4 days: 6,0,6,4,5,6,7,8,8
+After  5 days: 5,6,5,3,4,5,6,7,7,8
+After  6 days: 4,5,4,2,3,4,5,6,6,7
+After  7 days: 3,4,3,1,2,3,4,5,5,6
+After  8 days: 2,3,2,0,1,2,3,4,4,5
+After  9 days: 1,2,1,6,0,1,2,3,3,4,8
+After 10 days: 0,1,0,5,6,0,1,2,2,3,7,8
+After 11 days: 6,0,6,4,5,6,0,1,1,2,6,7,8,8,8
+After 12 days: 5,6,5,3,4,5,6,0,0,1,5,6,7,7,7,8,8
+After 13 days: 4,5,4,2,3,4,5,6,6,0,4,5,6,6,6,7,7,8,8
+After 14 days: 3,4,3,1,2,3,4,5,5,6,3,4,5,5,5,6,6,7,7,8
+After 15 days: 2,3,2,0,1,2,3,4,4,5,2,3,4,4,4,5,5,6,6,7
+After 16 days: 1,2,1,6,0,1,2,3,3,4,1,2,3,3,3,4,4,5,5,6,8
+After 17 days: 0,1,0,5,6,0,1,2,2,3,0,1,2,2,2,3,3,4,4,5,7,8
+After 18 days: 6,0,6,4,5,6,0,1,1,2,6,0,1,1,1,2,2,3,3,4,6,7,8,8,8,8</code></pre></div>
+<p>Each day, a <code>0</code> becomes a <code>6</code> and adds a new <code>8</code> to the end of the list,
+while each other number decreases by 1 if it was present at the start of
+the day.</p>
+<p>In this example, after 18 days, there are a total of <code>26</code> fish. After 80
+days, there would be a total of <strong><code>5934</code></strong>.</p>
+<p>Find a way to simulate lanternfish. <strong>How many lanternfish would there be
+after 80 days?</strong></p>
+<h3 id="part-two" class="section-header"><a href="#part-two">Part Two</a></h3>
+<p>Suppose the lanternfish live forever and have unlimited food and space.
+Would they take over the entire ocean?</p>
+<p>After 256 days in the example above, there would be a total of
+<strong><code>26984457539</code></strong> lanternfish!</p>
+<p><strong>How many lanternfish would there be after 256 days?</strong></p>
+</div></details><h2 id="constants" class="section-header"><a href="#constants">Constants</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="constant" href="constant.INPUT.html" title="advent_of_code_2021::challenges::day06::INPUT constant">INPUT</a></div><div class="item-right docblock-short"><p>Input file name</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="constant" href="constant.NAME.html" title="advent_of_code_2021::challenges::day06::NAME constant">NAME</a></div><div class="item-right docblock-short"><p>Name of the challenge</p>
+</div></div></div><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2>
+<div class="item-table"><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.part_1.html" title="advent_of_code_2021::challenges::day06::part_1 fn">part_1</a></div><div class="item-right docblock-short"><p>Solve part one</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.part_2.html" title="advent_of_code_2021::challenges::day06::part_2 fn">part_2</a></div><div class="item-right docblock-short"><p>Solve part two</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.simulate_for_days.html" title="advent_of_code_2021::challenges::day06::simulate_for_days fn">simulate_for_days</a></div><div class="item-right docblock-short"><p>Simulate the lanternfish for <code>days</code> days</p>
+</div></div><div class="item-row"><div class="item-left module-item"><a class="fn" href="fn.solve.html" title="advent_of_code_2021::challenges::day06::solve fn">solve</a></div><div class="item-right docblock-short"><p>Show results of part one and two</p>
+</div></div></div></section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="advent_of_code_2021" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
+    <script src="../../../main.js"></script>
+</body></html>
